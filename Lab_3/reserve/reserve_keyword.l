@@ -22,10 +22,6 @@ typedef {printf("\n%s is a keyword",yytext);}
 struct {printf("\n%s is a keyword",yytext);}
 goto {printf("\n%s is a keyword",yytext);}
 
-"/*" {COMMENT=1;}
-
-"*/" {COMMENT=0;}
-
 {identifier}\( {}
 
 \{ {}
