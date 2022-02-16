@@ -8,8 +8,7 @@
 %}
 
 %%
-[a-zA-Z]? {printf("%c",yytext[0]);}
-[+\-\*\/\(\)] {
+[+\-\*\/\(\)U@] {
                     char op = yytext[0];
                     if(s_top==0 || op == '(') push(op);
                     else if (op ==')'){
@@ -33,6 +32,8 @@
                         push(op);
                     }
                 }
+
+[a-zA-Z]? {printf("%c",yytext[0]);}
 
 [\n]            {
                 int i=0;
@@ -75,11 +76,13 @@ char top()
 int get_priority(char c)
 {
     switch(c){
-        case '(':return 0;
+        case '(':return 0; 
         case ')':return 0;
         case '+':return 1;
         case '-':return 1;
         case '*':return 2;
         case '/':return 2;
+        case '@':return 3;  /*exponentiation*/
+        case 'U':return 4;  /*unary minus*/
     }
 }
